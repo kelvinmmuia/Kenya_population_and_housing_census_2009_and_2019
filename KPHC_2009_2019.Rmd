@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 rm(list = ls())
 pdf_file <-"Kenyan_Population_2009.pdf"
 cairo_pdf(bg="#FAFAFA", pdf_file,width=12,height=12)
-par(mai=c(0.5,1,0.5,0.5),omi=c(0.5,0.5,0.5,0.5),family="Lato Regular",las=1)
+par(mai=c(0.5,1,0.5,0.5),omi=c(0.5,0.5,0.5,0.5),family="Lato Bold",las=1)
 library(readxl)
 # Import data and prepare chart
 population_data<-read_excel("kenya-population-and-housing-census-2009_pdf.xlsx")
@@ -78,7 +78,7 @@ mtext("Values in thousands per year of age",3,
 par(family="Symbol Signs")
 mtext("M",3, line=-6, adj=0.25,cex=5,col="blue")
 mtext("F",3, line=-6, adj=0.75, cex=5,col="deeppink")
-par(family="Lato Regular")
+par(family="Lato Bold")
 mtext(
   "Source: KNBS; 2009 KPHC Volume IC:-Population Distribution by Age, Sex and Administrative Units",
       1,line=0,adj=1.0,cex=1,font=3,outer=T)
@@ -91,7 +91,7 @@ dev.off()
 rm(list = ls())
 pdf_file <-"Kenyan_Population_2019.pdf"
 cairo_pdf(bg="#FAFAFA", pdf_file,width=12,height=12)
-par(mai=c(0.5,1,0.5,0.5),omi=c(0.5,0.5,0.5,0.5),family="Lato Regular",las=1)
+par(mai=c(0.5,1,0.5,0.5),omi=c(0.5,0.5,0.5,0.5),family="Lato Bold",las=1)
 library(readxl)
 # Import data and prepare chart
 population_data_2019<-read_excel("kenya-population-and-housing-census-2019_pdf.xlsx")
@@ -144,7 +144,7 @@ mtext("Values in thousands per year of age",3,
 par(family="Symbol Signs")
 mtext("M",3, line=-6, adj=0.25,cex=5,col="blue")
 mtext("F",3, line=-6, adj=0.75, cex=5,col="deeppink")
-par(family="Lato Regular")
+par(family="Lato Bold")
 mtext(
   "Source: KNBS; 2019 KPHC Volume III:- Distribution of Population by Age and Sex",
   1,line=0,adj=1.0,cex=1,font=3,outer=T)
