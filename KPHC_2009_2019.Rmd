@@ -1,0 +1,153 @@
+---
+title: "Kenya population and housing census 2009 and 2019"
+author: "Kelvin Mwaka Muia"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r, include=FALSE}
+## This is an options setup chunk
+knitr::opts_chunk$set(
+  options(tinytex.verbose = TRUE),
+  fig.show = TRUE,
+  fig.width = 8,
+  fig.asp = 1,
+  out.width = "100%",
+	fig.align='center',
+	echo = FALSE,#hide code
+	message = FALSE,
+	warning = FALSE, #to suppress warnings
+	comment = "",
+  results='hide')
+```
+
+
+```{r}
+rm(list = ls())
+pdf_file <-"Kenyan_Population_2009.pdf"
+cairo_pdf(bg="#FAFAFA", pdf_file,width=12,height=12)
+par(mai=c(0.5,1,0.5,0.5),omi=c(0.5,0.5,0.5,0.5),family="Lato Regular",las=1)
+library(readxl)
+# Import data and prepare chart
+population_data<-read_excel("kenya-population-and-housing-census-2009_pdf.xlsx")
+population_data$Age <- as.numeric(population_data$Age)
+kenyanmen_2009 <- population_data[,c(1:2)]
+kenyanwomen_2009 <- population_data[,c(1,3)]
+max(kenyanmen_2009)
+max(kenyanwomen_2009)
+kenyanmen_2009$Male <- kenyanmen_2009$Male/1000
+kenyanwomen_2009$Female <- kenyanwomen_2009$Female/1000
+
+#create color vectors for both kenyanmen_2009 and kenyanwomen_2009 bar-charts
+myColour_Women<-c(rep("#808000",18),
+                  rep("#2B1100",47),
+                  rep("#E19869",length(kenyanwomen_2009$Female)-65))
+myColour_Men <- myColour_Women
+#create bar-charts
+barplot(kenyanwomen_2009$Female, axes = FALSE, horiz = TRUE, 
+        axis.lty = 0,
+        border = myColour_Women,
+        space=c(0,0),
+        col = myColour_Women,
+        xlim = c(-750, 750))
+barplot(-kenyanmen_2009$Male, axes = FALSE, horiz = TRUE, 
+        axis.lty = 0,
+        border = myColour_Men,
+        space=c(0,0),
+        col = myColour_Men, 
+        xlim = c(-750, 750), 
+        add = TRUE)
+border_col = myColour_Women
+#add breaks at every ten-year interval
+for (i in seq(10, 80, by = 10)) {
+  rect(-750, i-0.05, 750, i+0.05, 
+       col = c(rep("#FAFAFA",18), rep("#A7B0B9",47),rep("#FAFAFA",length(kenyanwomen_2009$Female)-65)), 
+       border = c(rep("#FAFAFA",18), rep("#A7B0B9",47),rep("#FAFAFA",length(kenyanwomen_2009$Female)-65)))}
+abline(v=0,lwd=15,col="#FAFAFA")
+for (i in seq(10,80,by=10)) text(0,i+i*0.01,i,cex=0.8)
+mtext(abs(seq(-600,600,by=200)),at=seq(-600,600,by=200),1,line=0.25,cex=1)
+rect(-1000,18-18*0.05,1000,65+65*0.01,xpd=T, 
+     col=rgb(210,210,210,90,maxColorValue=255), border=NA)
+mtext("working age (18 to 65)",2,line=1.5,las=3,adj=0.38)
+#plot title
+mtext("Age Structure of the Population in Kenya in 2009",3,
+      line=-1.5,adj=0,cex=1.75,family="Lato Black",outer=T)
+mtext("Values in thousands per year of age",3,
+      line=-3.25,adj=0,cex=1.25,font=3,outer=T)
+#plot labels
+par(family="Symbol Signs")
+mtext("M",3, line=-6, adj=0.25,cex=5,col="blue")
+mtext("F",3, line=-6, adj=0.75, cex=5,col="deeppink")
+par(family="Lato Regular")
+mtext(
+  "Source: KNBS; 2009 KPHC Volume IC:-Population Distribution by Age, Sex and Administrative Units",
+      1,line=0,adj=1.0,cex=1,font=3,outer=T)
+
+dev.off()
+```
+
+
+```{r}
+rm(list = ls())
+pdf_file <-"Kenyan_Population_2019.pdf"
+cairo_pdf(bg="#FAFAFA", pdf_file,width=12,height=12)
+par(mai=c(0.5,1,0.5,0.5),omi=c(0.5,0.5,0.5,0.5),family="Lato Regular",las=1)
+library(readxl)
+# Import data and prepare chart
+population_data_2019<-read_excel("kenya-population-and-housing-census-2019_pdf.xlsx")
+population_data_2019$Age <- as.numeric(population_data_2019$Age)
+kenyanmen_2019 <- population_data_2019[,c(1:2)]
+kenyanwomen_2019 <- population_data_2019[,c(1,3)]
+max(kenyanmen_2019)
+max(kenyanwomen_2019)
+kenyanmen_2019$Male <- kenyanmen_2019$Male/1000
+kenyanwomen_2019$Female <- kenyanwomen_2019$Female/1000
+
+#create color vectors for both kenyanmen_2019 and kenyanwomen_2019 bar-charts
+myColour_Women<-c(rep("#808000",18),
+                  rep("#2B1100",47),
+                  rep("#E19869",length(kenyanwomen_2019$Female)-65))
+myColour_Men <- myColour_Women
+#create bar-charts
+barplot(kenyanwomen_2019$Female, axes = FALSE, horiz = TRUE, 
+        axis.lty = 0,
+        border = myColour_Women,
+        space=c(0,0),
+        col = myColour_Women,
+        xlim = c(-750, 750))
+barplot(-kenyanmen_2019$Male, axes = FALSE, horiz = TRUE, 
+        axis.lty = 0,
+        border = myColour_Men,
+        space=c(0,0),
+        col = myColour_Men, 
+        xlim = c(-750, 750), 
+        add = TRUE)
+border_col = myColour_Women
+#add breaks at every ten-year interval
+for (i in seq(10, 90, by = 10)) {
+  rect(-750, i-0.05, 750, i+0.05, 
+       col = c(rep("#FAFAFA",18), rep("#A7B0B9",47),rep("#FAFAFA",length(kenyanwomen_2019$Female)-65)), 
+       border = c(rep("#FAFAFA",18), rep("#A7B0B9",47),rep("#FAFAFA",length(kenyanwomen_2019$Female)-65)))}
+abline(v=0,lwd=15,col="#FAFAFA")
+for (i in seq(10,90,by=10)) text(0,i+i*0.01,i,cex=0.8)
+mtext(abs(seq(-750,750,by=150)),at=seq(-750,750,by=150),1,line=0.25,cex=1)
+rect(-1000,18-18*0.05,1000,65+65*0.01,xpd=T, 
+     col=rgb(210,210,210,90,maxColorValue=255), border=NA)
+mtext("working age (18 to 65)",2,line=1.5,las=3,adj=0.38)
+#plot title
+mtext("Age Structure of the Population in Kenya in 2019",3,
+      line=-1.5,adj=0,cex=1.75,family="Lato Black",outer=T)
+mtext("Values in thousands per year of age",3,
+      line=-3.25,adj=0,cex=1.25,font=3,outer=T)
+
+#plot labels
+par(family="Symbol Signs")
+mtext("M",3, line=-6, adj=0.25,cex=5,col="blue")
+mtext("F",3, line=-6, adj=0.75, cex=5,col="deeppink")
+par(family="Lato Regular")
+mtext(
+  "Source: KNBS; 2019 KPHC Volume III:- Distribution of Population by Age and Sex",
+  1,line=0,adj=1.0,cex=1,font=3,outer=T)
+
+dev.off()
+```
